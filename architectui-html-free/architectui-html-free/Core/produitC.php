@@ -2,7 +2,7 @@
 
 //include "./config.php";
 //require_once ('../architectui-html-free/architectui-html-free/config.php');
-include( 'C:\wamp64\www\Projet Web\architectui-html-free\architectui-html-free\config.php');
+include('C:\wamp64\www\ProjetWeb\architectui-html-free\architectui-html-free\config.php');
 
 class ProduitC
 {
