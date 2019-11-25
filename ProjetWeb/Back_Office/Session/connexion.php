@@ -29,16 +29,14 @@ if (!empty($_POST['login']) && !empty($_POST['pwd'])){
 	
 }
 if ($vide==false) { 
-         // Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait
          echo '<body onLoad="alert(\'Membre non reconnu...\')">'; 
-         // puis on le redirige vers la page d'accueil
-         echo '<meta http-equiv="refresh" content="0;URL=auth.html">'; 
+         echo '<meta http-equiv="refresh" content="0;URL=index.html">'; 
       } 
 }	  
  
 else { 
       echo "Les variables du formulaire ne sont pas déclarées.<br> Vous devez remplir le formulaire"; 
-     ?> <a href="auth.html">Retour au formulaire</a>	 <?php 
+     ?> <a href="index.html">Retour au formulaire</a>	 <?php 
 }  
 
 ?> 
