@@ -1,8 +1,14 @@
 <?php
 include 'Core/produitC.PHP';
 include 'Core/userC.PHP';
-?>
+session_start ();  
+ 
 
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
+{ 
+	if(strcmp($_SESSION['r'], 'Admin') == 0)
+{
+?>
 
 <!doctype html>
 <html lang="en">
@@ -120,7 +126,9 @@ include 'Core/userC.PHP';
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Salah Azzouz
+                                         <?php
+                                       echo $_SESSION['l'];
+                                       ?>
                                     </div>
                                     <div class="widget-subheading">
                                         VP People Manager
@@ -807,8 +815,8 @@ include 'Core/userC.PHP';
                                                         <?php
                                                             if (strcmp($row1['role'], 'Client') == 0) {
                                                                 ?>
-                                                            <form method="POST" action="Core/SupprimerUser.PHP">
-                                                                <input type="submit" name="Submit" value="Supprimer" class="btn-shadow dropdown-toggle btn btn-info">
+                                                            <form method="POST" action="Core/SupprimerUser.PHP" onsubmit="return ConfirmDelete()">
+                                                                <input type="submit" name="Submit" value="Supprimer" class="btn-shadow dropdown-toggle btn btn-info" >
                                                                 <input type="hidden" name="user_idd" value="<?PHP echo $row1['user_idd'] ?> " name="user_idd">
                                                             </form>
                                                         <?php
@@ -1144,3 +1152,12 @@ include 'Core/userC.PHP';
         });
     });
 </script>
+<?php
+}
+}
+else { 
+	echo 'Veuillez vous connecter </br>';  
+	echo '<a href="index.php">Cliquer pour se connecter</a>';
+
+}
+?>

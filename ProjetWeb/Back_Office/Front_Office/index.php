@@ -1,3 +1,12 @@
+<?php
+session_start ();  
+ 
+
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
+{ 
+	if(strcmp($_SESSION['r'], 'Client') == 0)
+{
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,6 +136,16 @@
 									</svg>
 									</div>
 								</div>
+								<ul>
+								<li class="hassubs">
+									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
+										<ul >
+											<li><a href="">Modifier Votre Profile</a></li>
+											<li><a href="../Session/logout.php">Déconnecter</a></li>
+					
+										</ul>
+									</li>
+									</ul>
 								<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 							</div>
 						</div>
@@ -585,3 +604,12 @@
 <script src="js/custom.js"></script>
 </body>
 </html>
+<?php
+}
+}
+else { 
+	echo 'Veuillez vous connecter </br>';  
+	echo '<a href="../index.php">Cliquer pour se connecter</a>';
+
+}
+?>

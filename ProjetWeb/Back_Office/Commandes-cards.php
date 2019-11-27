@@ -1,3 +1,13 @@
+<?php
+session_start ();  
+ 
+
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
+{ 
+	if(strcmp($_SESSION['r'], 'Admin') == 0)
+{
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -106,7 +116,9 @@
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Salah Azzouz
+                                         <?php
+                                       echo $_SESSION['l'];
+                                       ?>
                                     </div>
                                     <div class="widget-subheading">
                                         VP People Manager
@@ -902,3 +914,12 @@
     </div>
 <script type="text/javascript" src="./assets/scripts/main.js"></script></body>
 </html>
+<?php
+}
+}
+else { 
+	echo 'Veuillez vous connecter </br>';  
+	echo '<a href="index.php">Cliquer pour se connecter</a>';
+
+}
+?>

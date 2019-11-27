@@ -23,3 +23,4 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 	  header("location:../Front_Office/index.php");
 
 }  }
+?>
