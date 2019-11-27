@@ -51,6 +51,41 @@ try {
 
     }
 
+function Supprimer_User($user_idd)
+
+    {
+      
+        if(isset($_POST["user_idd"]) && !empty($_POST["user_idd"])){
+            $sql = "DELETE FROM table_users WHERE user_idd =:user_idd";
+            $c=new Database();
+            $conn=$c->connexion();
+            if($stmt = $conn->prepare($sql)){
+                $stmt->bindValue(":user_idd", $user_idd);
+                
+               
+                $user_idd = trim($_POST["user_idd"]);
+                
+                if($stmt->execute()){
+                    echo "<script type='text/javascript'> document.location = '../tables-regular.php'; </script>";
+                    exit();
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+            }
+            
+            $stmt->close();
+    
+            $conn->close();
+        } else{
+       
+            if(empty(trim($_GET["user_idd"]))){
+    
+                header("location: error.php");
+                exit();
+            }
+        }
+    }
+
 
 }
 

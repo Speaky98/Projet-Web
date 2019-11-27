@@ -98,7 +98,9 @@
                                             <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                             <button type="button" tabindex="0" class="dropdown-item">Actions</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+                                            <form method="get" action="Session/logout.php">
+                                            <button type="submit" tabindex="0" class="dropdown-item">Déconnecter</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -1,14 +1,14 @@
-function myFunction()
+function myFunction(f)
 {
-    passe=F.user_pass.value;
-    passe1=F.re_pass.value;
-    F.role.value="Client";
+    passe=f.user_pass.value;
+    passe1=f.re_pass.value;
+    f.role.value="Client";
     var verif=1;
-    if(F.user_name.value==""){
+    if(f.user_name.value==""){
     verif=0;
     alert("Le Nom est obligatoire");}
     
-    if(F.user_email.value=="")
+    if(f.user_email.value=="")
     {
         verif=0;
     alert("Veuillez entrer votre email "); 
@@ -29,11 +29,18 @@ function myFunction()
     verif=0;
     }
 
-    if(!(F.agree_term.checked)){
+    if(!(f.agree_term.checked)){
     alert("veuillez accepter les conditions d'utilisation");
     verif=0;}
     
-    if(verif!=0)
+    if(verif!=0){
     alert("Merci pour votre inscription");
+    return true;
+    }
+    else
+    {
+       alert("Veuillez remplir correctement tous les champs");
+       return false;
+    }
 }  
     

@@ -36,7 +36,7 @@ function Supprimer_Produit($Identifiant)
             $stmt->bindValue(":Identifiant", $Identifiant);
             
            
-            $param_id = trim($_POST["Identifiant"]);
+            $Identifiant = trim($_POST["Identifiant"]);
             
             if($stmt->execute()){
                 echo "<script type='text/javascript'> document.location = '../tables-regular.php'; </script>";

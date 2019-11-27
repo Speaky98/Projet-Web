@@ -4,28 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script language="javascript" src="js/main.js"></script>
+    <script language="javascript" src="Session/js/main.js"></script>
     <title>Sign Up</title>
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="Session/fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="Session/css/style.css">
 </head>
 <body>
 
     <div class="main">
 
         <!-- Sign up form -->
-        <form method="POST" name="F"  action="../Core/AjouterUser.php" onsubmit="myFunction()"> 
         <section class="signup">
                 <div id="dernieres-nouvelles1">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Register</h2>
-                        <form class="register-form" id="register-form">
+                        <form class="register-form" id="register-form" method="POST" action="Core/AjouterUser.php" onsubmit="return myFunction(this)">
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="user_name" id="name" placeholder="Your Name"/>
@@ -57,22 +56,21 @@
                         </form>
                     </div>
                     <div class="signup-image">
-                        <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
+                        <figure><img src="Session/images/signup-image.jpg" alt="sing up image"></figure>
                         <a href="#dernieres-nouvelles" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
             </div>
         </div>
         </section>
-    </form>
         <!-- Sing in  Form -->
-        <form id="form1" name="form1" method="POST" action="connexion.php">
+        <form id="form1" name="form1" method="POST" action="Session/connexion.php">
         <section class="sign-in">
                 <div id="dernieres-nouvelles">
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
+                        <figure><img src="Session/images/signin-image.jpg" alt="sing up image"></figure>
                         <a href="#dernieres-nouvelles1" class="signup-image-link">Create an account</a>
                     </div>
 
@@ -112,7 +110,7 @@
     </div>
 
     <!-- JS -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="Session/vendor/jquery/jquery.min.js"></script>
+    <script src="Session/js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
