@@ -813,14 +813,14 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                                     </td>
                                                     <td>
                                                         <?php
-                                                            if (strcmp($row1['role'], 'Client') == 0) {
+                                                           if (strcmp($row1['role'], 'Client') == 0) {
                                                                 ?>
                                                             <form method="POST" action="Core/SupprimerUser.PHP" onsubmit="return ConfirmDelete()">
                                                                 <input type="submit" name="Submit" value="Supprimer" class="btn-shadow dropdown-toggle btn btn-info" >
                                                                 <input type="hidden" name="user_idd" value="<?PHP echo $row1['user_idd'] ?> " name="user_idd">
                                                             </form>
                                                         <?php
-                                                            }
+                                                           }
                                                             ?>
                                                     </td>
 

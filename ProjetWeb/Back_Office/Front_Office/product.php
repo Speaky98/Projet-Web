@@ -141,8 +141,8 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 								<li class="hassubs">
 									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
-											<li><a href="">Modifier Votre Profile</a></li>
-											<li><a href="../Session/logout.php">Déconnecter</a></li>
+											<li><a style="color:black;"  href="../Core/ModifierUser.php?user_name=<?PHP echo $_SESSION['l']; ?>" class="btn btn-primary">Modifier Votre Profile</a></li>
+											<li><a style="color:black;" href="../Session/logout.php">Déconnecter</a></li>
 					
 										</ul>
 									</li>

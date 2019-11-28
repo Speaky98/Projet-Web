@@ -1,16 +1,18 @@
 <?php
+//include 'C:\wamp64\www\ProjetWeb\ProjetWeb\Back_Office\Session\dbconfig.php';
 
-include 'produitC.php';
-include '../Entities/produit.php';
+include 'UserC.php';
+include '../Entities/userfirst.php';
  
 
-$sql ='SELECT * FROM table_produits WHERE Identifiant=:Identifiant';
-$db =config ::getConnexion();
+$sql ='select * from table_users WHERE user_name=:user_name';
+$c=new Database();
+$conn=$c->connexion();
 
 
-$req =$db->prepare($sql);
+$req =$conn->prepare($sql);
 
-$req->bindValue(':Identifiant',$_GET['Identifiant']);
+$req->bindValue(':user_name',$_GET['user_name']);
 
 $req->execute();
 
@@ -24,7 +26,7 @@ $row=$req->fetch();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Modifier un produit</title>
+	<title>Modifier votre compte</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -51,49 +53,37 @@ $row=$req->fetch();
 <!--===============================================================================================-->
 </head>
 <body>
-	<form method="POST" name="f"  action="modifierProduitAfter.php">
+	<form method="POST" name="f"  action="ModifierUserAfter.php">
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 				<form class="login100-form validate-form flex-sb flex-w">
-					<span class="login100-form-title p-b-32">
-						Modifier un produit
-					</span>
-
 					<span class="txt1 p-b-11">
-						Identifiant
+                    <?PHP  echo $row ['user_name'] ?>
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Identifiant is required">
-						<input class="input100" type="hidden" name="Identifiant"  value="<?PHP  echo $row ['Identifiant'] ?> " >
+						<input hidden class="input100" type="text" name="user_name"  value="<?PHP  echo $row ['user_name'] ?> " >
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
-						Nom
+						Adresse_email
 					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Nom is required">
-						<input class="input100" type="text" name="Nom" value="<?PHP  echo $row ['Nom'] ?> "  >
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Adresse_email is required">
+						<input class="input100" type="text" name="user_email" value="<?PHP  echo $row ['user_email'] ?> "  >
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
-						Prix
+						Mot de passe
 					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Prix is required">
-						<input class="input100" type="text" name="Prix" value="<?PHP  echo $row ['Prix'] ?> " >
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Mot de passe is required">
+						<input class="input100" type="text" name="user_pass" value="<?PHP  echo $row ['user_pass'] ?> " >
 						<span class="focus-input100"></span>
-					</div>
-					<span class="txt1 p-b-11">
-						Categorie
+                    </div>
+                    <span hidden class="txt1 p-b-11">
+						Role
 					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Categorie is required">
-						<input class="input100" type="text" name="Categorie" value="<?PHP  echo $row ['Categorie'] ?> " >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						Marque
-					</span>
-					<div class="wrap-input100 validate-input m-b-12" data-validate = "Marque is required">
-						<input class="input100" type="text" name="Marque" value="<?PHP  echo $row ['Marque'] ?> " >
+					<div hidden class="wrap-input100 validate-input m-b-36" data-validate = "Role is required">
+						<input class="input100" type="text" name="role" value="<?PHP  echo $row ['role'] ?> " >
 						<span class="focus-input100"></span>
 					</div>
 					<div class="container-login100-form-btn">
@@ -102,7 +92,7 @@ $row=$req->fetch();
 					<div class="container-login100-form-btn" style="
 					margin-left: 80%;
 					margin-top: -7%;">
-						<a href="../tables-regular.php"><h5 style="text-align: right; font-weight: bold; font-size: .88rem;">abort the change</h5></a>
+						<a href="../Front_Office/index.php"><h5 style="text-align: right; font-weight: bold; font-size: .88rem;">abort the change</h5></a>
 					</div>
 				</form>
 			</div>

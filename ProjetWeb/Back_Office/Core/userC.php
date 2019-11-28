@@ -85,7 +85,29 @@ function Supprimer_User($user_idd)
             }
         }
     }
-
+function Modifier_User($user_name, $user_email, $user_pass,$role) {
+        $sql = "update table_users set 
+						user_email = :user_email,
+						user_pass = :user_pass,
+                        role=:role
+                        where user_name =:user_name ";	
+                        $c=new Database();
+                        $conn=$c->connexion();
+                try {   
+                   
+                    $req=$conn->prepare($sql); 
+                    $req->bindValue(':user_name',$user_name);
+                    $req->bindValue(':user_email',$user_email);
+                     $req->bindValue(':user_pass',$user_pass);
+                     $req->bindValue(':role',$role);
+                    $req->execute();
+                   
+            
+            }catch (Exception $e)
+            {
+                echo "Erreur ".$e->getMessage();
+            }
+	}
 
 }
 
