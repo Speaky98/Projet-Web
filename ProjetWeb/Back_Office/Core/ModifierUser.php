@@ -1,18 +1,23 @@
 <?php
 //include 'C:\wamp64\www\ProjetWeb\ProjetWeb\Back_Office\Session\dbconfig.php';
 
+session_start ();  
 include 'UserC.php';
 include '../Entities/userfirst.php';
- 
 
-$sql ='select * from table_users WHERE user_name=:user_name';
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
+{ 
+	if(strcmp($_SESSION['r'], 'Client') == 0)
+{
+
+$sql ='select * from table_users WHERE user_idd=:user_idd';
 $c=new Database();
 $conn=$c->connexion();
 
 
 $req =$conn->prepare($sql);
 
-$req->bindValue(':user_name',$_GET['user_name']);
+$req->bindValue(':user_idd',$_GET['user_idd']);
 
 $req->execute();
 
@@ -51,39 +56,47 @@ $row=$req->fetch();
 	<link rel="stylesheet" type="text/css" href="../View/css/util.css">
 	<link rel="stylesheet" type="text/css" href="../View/css/main.css">
 <!--===============================================================================================-->
+<script src="testuser.js"></script>
 </head>
 <body>
-	<form method="POST" name="f"  action="ModifierUserAfter.php">
+	<form method="POST" name="f"  action="ModifierUserAfter.php" onsubmit="return test();">
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 				<form class="login100-form validate-form flex-sb flex-w">
+				<span hidden class="txt1 p-b-11">
+                       Id
+					</span>
+					<div hidden class="wrap-input100 validate-input m-b-36" data-validate = "Identifiant is required">
+						<input class="input100" type="text" name="user_idd"  value="<?PHP  echo $row ['user_idd'] ?>" >
+						<span class="focus-input100"></span>
+					</div>
 					<span class="txt1 p-b-11">
-                    <?PHP  echo $row ['user_name'] ?>
+                       Name
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Identifiant is required">
-						<input hidden class="input100" type="text" name="user_name"  value="<?PHP  echo $row ['user_name'] ?> " >
+						<input class="input100" type="text" name="user_name"  value="<?PHP  echo $row ['user_name'] ?>" >
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
 						Adresse_email
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Adresse_email is required">
-						<input class="input100" type="text" name="user_email" value="<?PHP  echo $row ['user_email'] ?> "  >
+						<input class="input100" type="text" name="user_email" value="<?PHP  echo $row ['user_email'] ?>"  >
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
 						Mot de passe
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Mot de passe is required">
-						<input class="input100" type="text" name="user_pass" value="<?PHP  echo $row ['user_pass'] ?> " >
+						<input class="input100" type="text" name="user_pass" value="<?PHP  echo $row ['user_pass'] ?>" >
 						<span class="focus-input100"></span>
                     </div>
                     <span hidden class="txt1 p-b-11">
 						Role
 					</span>
 					<div hidden class="wrap-input100 validate-input m-b-36" data-validate = "Role is required">
-						<input class="input100" type="text" name="role" value="<?PHP  echo $row ['role'] ?> " >
+						<input class="input100" type="text" name="role" value="<?PHP  echo $row ['role'] ?>" >
 						<span class="focus-input100"></span>
 					</div>
 					<div class="container-login100-form-btn">
@@ -92,7 +105,7 @@ $row=$req->fetch();
 					<div class="container-login100-form-btn" style="
 					margin-left: 80%;
 					margin-top: -7%;">
-						<a href="../Front_Office/index.php"><h5 style="text-align: right; font-weight: bold; font-size: .88rem;">abort the change</h5></a>
+						<a href="../Front_Office/home1.php"><h5 style="text-align: right; font-weight: bold; font-size: .88rem;">abort the change</h5></a>
 					</div>
 				</form>
 			</div>
@@ -120,3 +133,12 @@ $row=$req->fetch();
 </form>
 </body>
 </html>
+<?php
+}
+}
+else { 
+	echo 'Veuillez vous connecter </br>';  
+	echo '<a href="../index.php">Cliquer pour se connecter</a>';
+
+}
+?>

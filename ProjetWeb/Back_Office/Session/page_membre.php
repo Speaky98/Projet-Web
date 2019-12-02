@@ -20,7 +20,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 {
       /*echo 'Veuillez vous connecter </br>';  
 	  echo '<a href="../index.php">Cliquer pour se connecter</a>';*/
-	  header("location:../Front_Office/index.php");
+	  header("location:../Front_Office/home1.php");
 
 }  }
 ?>

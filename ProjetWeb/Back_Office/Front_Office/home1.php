@@ -1,4 +1,7 @@
 <?php
+
+include '../Core/UserC.php';
+include '../Entities/userfirst.php';
 session_start ();  
  
 
@@ -6,6 +9,20 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 { 
 	if(strcmp($_SESSION['r'], 'Client') == 0)
 {
+$user_name=$_SESSION['l'];
+
+ $sql ='select * from table_users WHERE user_name=:user_name';
+$c=new Database();
+$conn=$c->connexion();
+
+
+$req =$conn->prepare($sql);
+
+$req->bindValue(':user_name',$user_name);
+
+$req->execute();
+
+$row=$req->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +56,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 							<nav class="main_nav">
 								<ul>
 									<li class="hassubs active">
-										<a href="index.php">Téléphone</a>
+										<a href="home1.php">Téléphone</a>
 										<ul>
 											<li><a href="categories.php">Smartphone</a></li>
 											<li><a href="product.php">Tel fixe</a></li>
@@ -140,7 +157,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 								<li class="hassubs">
 									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
-											<li><a style="color:black;"  href="../Core/ModifierUser.php?user_name=<?PHP echo $_SESSION['l']; ?>" class="btn btn-primary">Modifier Votre Profile</a></li>
+											<li><a style="color:black;"  href="../Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-primary">Modifier Votre Profile</a></li>
 											<li><a style="color:black;" href="../Session/logout.php">Déconnecter</a></li>
 					
 										</ul>
@@ -193,7 +210,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 				</div>
 				<ul class="page_menu_nav menu_mm">
 					<li class="page_menu_item has-children menu_mm">
-						<a href="index.php">Téléphone<i class="fa fa-angle-down"></i></a>
+						<a href="home1.php">Téléphone<i class="fa fa-angle-down"></i></a>
 						<ul class="page_menu_selection menu_mm">
 							<li class="page_menu_item menu_mm"><a href="categories.php">Smartphone<i class="fa fa-angle-down"></i></a></li>
 							<li class="page_menu_item menu_mm"><a href="product.php">Tel fixe<i class="fa fa-angle-down"></i></a></li>

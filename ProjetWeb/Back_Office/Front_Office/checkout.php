@@ -37,7 +37,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 							<nav class="main_nav">
 								<ul>
 									<li class="hassubs active">
-										<a href="index.php">Téléphone</a>
+										<a href="home1.php">Téléphone</a>
 										<ul>
 											<li><a href="categories.php">Smartphone</a></li>
 											<li><a href="product.php">Tel fixe</a></li>
@@ -191,7 +191,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 				</div>
 				<ul class="page_menu_nav menu_mm">
 					<li class="page_menu_item has-children menu_mm">
-						<a href="index.php">Téléphone<i class="fa fa-angle-down"></i></a>
+						<a href="home1.php">Téléphone<i class="fa fa-angle-down"></i></a>
 						<ul class="page_menu_selection menu_mm">
 							<li class="page_menu_item menu_mm"><a href="categories.php">Smartphone<i class="fa fa-angle-down"></i></a></li>
 							<li class="page_menu_item menu_mm"><a href="product.php">Tel fixe<i class="fa fa-angle-down"></i></a></li>
@@ -274,7 +274,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 							<div class="home_content">
 								<div class="breadcrumbs">
 									<ul>
-										<li><a href="index.php">Téléphone</a></li>
+										<li><a href="home1.php">Téléphone</a></li>
 										<li><a href="cart.php">Shopping Cart</a></li>
 										<li>Checkout</li>
 									</ul>

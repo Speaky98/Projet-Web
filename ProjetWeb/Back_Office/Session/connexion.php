@@ -16,11 +16,10 @@
 
 	$vide = false;
 	if (!empty($_POST['login']) && !empty($_POST['pwd'])) {
-
 		foreach ($u as $t) {
-			$vide = true;
+			
 			if ($t['user_name'] == $_POST['login'] && $t['user_pass'] == $_POST['pwd']) {
-
+				$vide = true;
 				session_start();
 				$_SESSION['l'] = $_POST['login'];
 				$_SESSION['p'] = $_POST['pwd'];
