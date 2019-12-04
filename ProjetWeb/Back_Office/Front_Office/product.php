@@ -1,13 +1,27 @@
 <?php
-session_start ();  
- 
+include '../Core/produitC.PHP';
+include '../Core/UserC.php';
+include '../Entities/userfirst.php';
+session_start();
 
-if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
-{ 
-	if(strcmp($_SESSION['r'], 'Client') == 0)
-{
-?>
 
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
+	if (strcmp($_SESSION['r'], 'Client') == 0) {
+		$user_name = $_SESSION['l'];
+
+		$sql = 'select * from table_users WHERE user_name=:user_name';
+		$c = new Database();
+		$conn = $c->connexion();
+
+
+		$req = $conn->prepare($sql);
+
+		$req->bindValue(':user_name', $user_name);
+
+		$req->execute();
+
+		$row = $req->fetch();
+		?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,15 +46,17 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 
 	<header class="header">
 		<div class="header_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
+			<div class="container" >
+				<div class="row" style="
+    margin-inline-end: auto;
+">
+					<<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo"><a href="#">Prodigy</a></div>
 							<nav class="main_nav">
 								<ul>
 									<li class="hassubs active">
-										<a href="index.php">Téléphone</a>
+										<a href="home1.php">Téléphone</a>
 										<ul>
 											<li><a href="categories.php">Smartphone</a></li>
 											<li><a href="product.php">Tel fixe</a></li>
@@ -141,7 +157,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 								<li class="hassubs">
 									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
-											<li><a style="color:black;"  href="../Core/ModifierUser.php?user_name=<?PHP echo $_SESSION['l']; ?>" class="btn btn-primary">Modifier Votre Profile</a></li>
+										<li><a style="color:black;" href="../Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
 											<li><a style="color:black;" href="../Session/logout.php">Déconnecter</a></li>
 					
 										</ul>
@@ -159,7 +175,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 		<div class="search_panel trans_300">
 			<div class="container">
 				<div class="row">
-					<div class="col">
+					<<div class="col">
 						<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
 							<form action="#">
 								<input type="text" class="search_input" placeholder="Search" required="required">
@@ -194,7 +210,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 				</div>
 				<ul class="page_menu_nav menu_mm">
 					<li class="page_menu_item has-children menu_mm">
-						<a href="index.php">Téléphone<i class="fa fa-angle-down"></i></a>
+						<a href="home1.php">Téléphone<i class="fa fa-angle-down"></i></a>
 						<ul class="page_menu_selection menu_mm">
 							<li class="page_menu_item menu_mm"><a href="categories.php">Smartphone<i class="fa fa-angle-down"></i></a></li>
 							<li class="page_menu_item menu_mm"><a href="product.php">Tel fixe<i class="fa fa-angle-down"></i></a></li>
@@ -273,7 +289,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 			<div class="home_content_container">
 				<div class="container">
 					<div class="row">
-						<div class="col">
+						<<div class="col">
 							<div class="home_content">
 								<div class="home_title">Smart Phones<span>.</span></div>
 								<div class="home_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p></div>
@@ -348,7 +364,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 			</div>
 
 			<div class="row description_row">
-				<div class="col">
+				<<div class="col">
 					<div class="description_title_container">
 						<div class="description_title">Description</div>
 						<div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
@@ -371,7 +387,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
+				<<div class="col">
 					
 					<div class="product_grid">
 
@@ -424,7 +440,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 	<div class="newsletter">
 		<div class="container">
 			<div class="row">
-				<div class="col">
+				<<div class="col">
 					<div class="newsletter_border"></div>
 				</div>
 			</div>
@@ -452,7 +468,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 		<div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
 		<div class="container">
 			<div class="row">
-				<div class="col">
+				<<div class="col">
 					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
 						<div class="footer_logo"><a href="#">Prodigy</a></div>
 						<div class="footer_social ml-lg-auto">

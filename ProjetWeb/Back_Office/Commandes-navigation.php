@@ -763,7 +763,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                 <div class="main-card mb-3 card">
                                     <div class="card-body"><h5 class="card-title">Vertical Menu</h5>
                                         <div class="row">
-                                            <div class="col">
+                                            <<div class="col">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Link</a></li>
                                                     <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Link
@@ -775,7 +775,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                                     <li class="nav-item"><a disabled="" href="javascript:void(0);" class="nav-link disabled">Disabled Link</a></li>
                                                 </ul>
                                             </div>
-                                            <div class="col">
+                                            <<div class="col">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon lnr-inbox"> </i><span>Inbox</span>
                                                         <div class="ml-auto badge badge-pill badge-secondary">86</div>
@@ -811,7 +811,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                 <div class="main-card mb-3 card">
                                     <div class="card-body"><h5 class="card-title">Separators &amp; Headers</h5>
                                         <div class="row">
-                                            <div class="col">
+                                            <<div class="col">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item-header nav-item">Activity</li>
                                                     <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Chat
@@ -832,7 +832,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col">
+                                            <<div class="col">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item-header nav-item">Activity</li>
                                                     <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-chat"> </i><span>Chat</span>

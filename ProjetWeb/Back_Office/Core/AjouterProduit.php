@@ -5,12 +5,12 @@ include '../Entities/produit.php';
 
 
 
-if ( !empty($_POST['Identifiant']) &&  !empty($_POST['Nom'] )&& !empty($_POST['Prix']) && !empty($_POST['Categorie'] )&& !empty($_POST['Marque'])    )
+if ( !empty($_POST['Identifiant']) &&  !empty($_POST['Nom'] )&& !empty($_POST['Prix']) && !empty($_POST['Categorie'] )&& !empty($_POST['Marque'])  && !empty($_FILES['Prod_File']['name'])    )
 {
  
 
 
-    $Produit=new Produit($_POST['Identifiant'],$_POST['Nom'],$_POST['Prix'],$_POST['Categorie'],$_POST['Marque']);
+    $Produit=new Produit($_POST['Identifiant'],$_POST['Nom'],$_POST['Prix'],$_POST['Categorie'],$_POST['Marque'],$_FILES['Prod_File']['name']);
     
     $ProduitC=new ProduitC();
     $ProduitC->Ajouter_Produit($Produit);

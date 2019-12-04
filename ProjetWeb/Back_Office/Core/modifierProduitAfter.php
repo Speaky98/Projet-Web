@@ -22,7 +22,7 @@ $req->bindValue(':Marque',$_POST['Marque']);
 $req->execute();*/
   
     $ProduitC=new ProduitC();
-    $ProduitC->Modifier_Produit($_POST['Identifiant'],$_POST['Nom'],$_POST['Prix'],$_POST['Categorie'],$_POST['Marque']);
+    $ProduitC->Modifier_Produit($_POST['Identifiant'],$_POST['Nom'],$_POST['Prix'],$_POST['Categorie'],$_POST['Marque'],$_FILES['Prod_File']['name']);
 
     
      echo "<script type='text/javascript'> document.location = '../tables-regular.php'; </script>";
