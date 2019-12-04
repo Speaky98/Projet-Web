@@ -1,13 +1,27 @@
 <?php
-session_start ();  
- 
+include '../Core/produitC.PHP';
+include '../Core/UserC.php';
+include '../Entities/userfirst.php';
+session_start();
 
-if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
-{ 
-	if(strcmp($_SESSION['r'], 'Client') == 0)
-{
-?>
 
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
+	if (strcmp($_SESSION['r'], 'Client') == 0) {
+		$user_name = $_SESSION['l'];
+
+		$sql = 'select * from table_users WHERE user_name=:user_name';
+		$c = new Database();
+		$conn = $c->connexion();
+
+
+		$req = $conn->prepare($sql);
+
+		$req->bindValue(':user_name', $user_name);
+
+		$req->execute();
+
+		$row = $req->fetch();
+		?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +43,10 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 
 	<header class="header">
 		<div class="header_container">
-			<div class="container">
-				<div class="row">
+			<div class="container" >
+				<div class="row" style="
+    margin-inline-end: auto;
+">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo"><a href="#">Prodigy</a></div>
@@ -138,7 +154,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 								<li class="hassubs">
 									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
-											<li><a style="color:black;"  href="../Core/ModifierUser.php?user_name=<?PHP echo $_SESSION['l']; ?>" class="btn btn-primary">Modifier Votre Profile</a></li>
+										<li><a style="color:black;" href="../Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
 											<li><a style="color:black;" href="../Session/logout.php">Déconnecter</a></li>
 					
 										</ul>

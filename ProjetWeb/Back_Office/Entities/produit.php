@@ -8,11 +8,11 @@ private  $Nom;
 private  $Prix;
 private $Categorie;
 private  $Marque;
+private $Prod_File;
 
 
 
-
-function __construct( $Identifiant,$Nom,$Prix,$Categorie,$Marque)
+function __construct( $Identifiant,$Nom,$Prix,$Categorie,$Marque,$Prod_File)
 {
 
 $this->Identifiant =$Identifiant;
@@ -20,6 +20,7 @@ $this->Nom=$Nom;
 $this->Prix=$Prix;
 $this->Categorie=$Categorie;
 $this->Marque=$Marque;
+$this->Prod_File=$Prod_File;
 
 }
 
@@ -34,6 +35,9 @@ function getCategorie()
 {return $this->Categorie;}
 function getMarque()
 {return $this->Marque;}
+function getProd_File()
+{return $this->Prod_File;}
+
 
 
  
@@ -45,6 +49,9 @@ function setCategorie($Categorie)
 {$this->Categorie=$Categorie;}
 function setMarque($Marque)
 { $this->Marque=$Marque;}
+function setProd_File($Prod_File)
+{ $this->Prod_File=$Prod_File;}
+
 
 
 

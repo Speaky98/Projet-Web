@@ -62,11 +62,21 @@ function Supprimer_Produit($Identifiant)
 
 function Ajouter_Produit($Produit)
     {
-$sql="insert into table_produits (Identifiant,Nom,Prix,Categorie,Marque) values(:Identifiant,:Nom,:Prix,:Categorie,:Marque)";
+        
+        $msg = "";
+
+
+  if (isset($_FILES['Prod_File']['name']) && $_FILES['Prod_File']['name']!="")
+  {
+  	
+  	$Prod_File = $_FILES['Prod_File']['name'];
+  	
+      $target = "../attachment/".basename($Prod_File);
+      
+$sql="insert into table_produits (Identifiant,Nom,Prix,Categorie,Marque,Prod_File) values(:Identifiant,:Nom,:Prix,:Categorie,:Marque,'$target')";
 $db =config ::getConnexion();
 try {
         $req =$db->prepare($sql);
-
         $Identifiant=$Produit->getIdentifiant();
         $Nom=$Produit->getNom();
         $Prix=$Produit->getPrix();
@@ -81,12 +91,18 @@ try {
         $req->bindValue(':Marque',$Marque);
 
         $req->execute();
+        if (copy($_FILES['Prod_File']['tmp_name'], $target)) {
+            $msg ="Image uploaded successfully";
+        }else{
+            $msg = "Failed to upload image";
+        }
 
 }catch (Exception $e)
 {
     echo "Erreur ".$e->getMessage();
 }
 
+}
 
     }
 
@@ -111,11 +127,22 @@ $row=$req->fetch();
 	}*/
 
 	function Modifier_Produit($Identifiant, $Nom, $Prix, $Categorie, $Marque) {
+        $msg = "";
+
+
+        if (isset($_FILES['Prod_File']['name']) && $_FILES['Prod_File']['name']!="")
+        {
+            
+            $Prod_File = $_FILES['Prod_File']['name'];
+            
+            $target = "../attachment/".basename($Prod_File);
+
         $sql = "UPDATE table_produits SET 
 						Nom = :Nom,
 						Prix = :Prix,
 						Categorie = :Categorie,
-						Marque = :Marque
+						Marque = :Marque,
+                        Prod_File='$target'
                         where Identifiant =:Identifiant ";	
                         $db =config ::getConnexion();
                 try {   
@@ -127,14 +154,18 @@ $row=$req->fetch();
                     $req->bindValue(':Categorie',$Categorie);
                      $req->bindValue(':Marque',$Marque);
                     $req->execute();
-                   
+                    if (move_uploaded_file($_FILES['Prod_File']['tmp_name'], $target)) {
+                        $msg ="Image uploaded successfully";
+                    }else{
+                        $msg = "Failed to upload image";
+                    }
             
             }catch (Exception $e)
             {
                 echo "Erreur ".$e->getMessage();
             }
 	}
-
+    }
 
 }
 

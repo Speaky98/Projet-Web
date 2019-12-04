@@ -19,6 +19,14 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Regular Tables - Tables are the backbone of almost all web applications.</title>
+    <style type="text/css">
+   #taswira{
+   	float: left;
+   	margin: 5px;
+   	width: 140px;
+   	height: 140px;
+   }
+</style>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Tables are the backbone of almost all web applications.">
     <meta name="msapplication-tap-highlight" content="no">
@@ -720,12 +728,12 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="main-card mb-3 card" style="margin-right: -50%;">
+                            <div class="main-card mb-3 card" style="margin-right: -80%;">
                                 <div class="card-body">
                                     <h5 class="card-title">Produits</h5>
-                                    <a href="view/index.html">
-                                        <h5 style="text-align: right; MARGIN-RIGHT: 36px;    font-size: .88rem;"><i class="pe-7s-plus"> </i> Ajouter</h5>
-                                    </a>
+                                    <div style="text-align: right; MARGIN-RIGHT: 36px;    font-size: .88rem;">
+                                    <a href="view/index.php" class="btn btn-info" Style="margin-bottom: 1%;" ><i class="pe-7s-plus"> </i> Ajouter</a>
+                                    </div>
                                     <?PHP
 
 
@@ -743,6 +751,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                                 <th>Prix</th>
                                                 <th>Categorie</th>
                                                 <th>Marque</th>
+                                                <th>Image</th>
                                                 <th>Supprimer</th>
                                                 <th>Modifier</th>
                                             </tr>
@@ -757,6 +766,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                                     <td> <?PHP echo $row['Prix'];   ?></td>
                                                     <td> <?PHP echo $row['Categorie'];   ?></td>
                                                     <td> <?PHP echo $row['Marque'];   ?></td>
+                                                    <td> <img id="taswira" src="attachment/<?php echo $row["Prod_File"]; ?>"/></td>
                                                     <td>
                                                         <form method="POST" action="Core/SupprimerProduit.PHP" onsubmit="return ConfirmDelete()">
                                                             <input type="submit" name="Submit" value="Supprimer" class="btn-shadow dropdown-toggle btn btn-info">
