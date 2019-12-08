@@ -21,6 +21,30 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		$req->execute();
 
 		$row = $req->fetch();
+
+			/*	$table_produits1 = $conn->prepare('SELECT * FROM table_produits where Identifiant=:Identifiant');
+			
+			$table_produits1->bindValue(':Identifiant', $_GET['Identifiant']);
+
+		$table_produits1->execute();
+
+		$row1 = $table_produits1->fetch();*/
+
+		if (isset($_POST['q']) and !empty($_POST['q'])) {
+
+			$q = htmlspecialchars($_POST['q']);
+
+			$table_produits = $conn->prepare('SELECT Nom,Categorie,Marque,Identifiant FROM table_produits WHERE Nom LIKE "%' . $q . '%" ORDER BY Identifiant DESC');
+
+			$table_produits->execute();
+
+			if ($table_produits->rowCount() == 0) {
+
+				$table_produits = $conn->prepare('SELECT Nom,Categorie,Marque,Identifiant FROM table_produits WHERE CONCAT(Nom, Categorie, Marque) LIKE "%' . $q . '%" ORDER BY Identifiant DESC');
+
+				$table_produits->execute();
+			}
+		}
 		?>
 		<!DOCTYPE html>
 		<html lang="en">
@@ -39,13 +63,13 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 			<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 			<link rel="stylesheet" type="text/css" href="styles/responsive.css">
 			<style type="text/css">
-   #taswira{
-   	float: left;
-   	margin: 5px;
-   	width: 340px;
-   	height: 240px;
-   }
-</style>
+				#taswira {
+					float: left;
+					margin: 5px;
+					width: 340px;
+					height: 240px;
+				}
+			</style>
 		</head>
 
 		<body>
@@ -57,15 +81,11 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 				<header class="header">
 					<div class="header_container">
 						<div class="container">
-							<div class="row">
+							<div class="row" style="margin-block-end: auto;">
 								<div class="col">
 									<div class="header_content d-flex flex-row align-items-center justify-content-start">
-										<div class="logo"><a href="#" style="
-    margin-left: -30%;
-">Prodigy</a></div>
-										<nav class="main_nav" style="
-    margin-left: 3%;
-">
+										<div class="logo"><a href="#">Prodigy</a></div>
+										<nav class="main_nav" style="margin-left: 80px;">
 											<ul>
 												<li class="hassubs active">
 													<a href="home1.php">Téléphone</a>
@@ -128,7 +148,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 												<li><a href="contact.php">Contact</a></li>
 											</ul>
 										</nav>
-										<div class="header_extra ml-auto">
+										<div class="header_extra ml-auto" style="margin-right: 15px;">
 											<div class="shopping_cart">
 												<a href="cart.php">
 													<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
@@ -145,7 +165,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 											</div>
 											<div class="search">
 												<div class="search_icon">
-													<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 475.084 475.084" style="padding-left: 120;enable-background:new 0 0 475.084 475.084;" xml:space="preserve">
+													<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 475.084 475.084" style="enable-background:new 0 0 475.084 475.084;" xml:space="preserve">
 														<g>
 															<path d="M464.524,412.846l-97.929-97.925c23.6-34.068,35.406-72.047,35.406-113.917c0-27.218-5.284-53.249-15.852-78.087
 												c-10.561-24.842-24.838-46.254-42.825-64.241c-17.987-17.987-39.396-32.264-64.233-42.826
@@ -163,7 +183,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 												</div>
 											</div>
 											<ul>
-												<li class="hassubs">
+												<li class="hassubs" style="margin-top: 12%;">
 													<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?></a>
 													<ul>
 														<li><a style="color:black;" href="../Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
@@ -186,9 +206,40 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							<div class="row">
 								<div class="col">
 									<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-										<form action="#">
-											<input type="text" class="search_input" placeholder="Search" required="required">
+										<form method="POST" style="margin-right: 3%;">
+											<input type="search" name="q" class="search_input" autocomplete="off" placeholder="Search" required="required">
+											<input hidden type="submit" value="Valider" />
 										</form>
+										<?php
+												if (isset($_POST['q'])) {
+													if ($table_produits->rowCount() > 0) {
+														?>
+												<ul>
+													<li class="hassubs" style=" margin-top: 85%;">
+														<a style="font-size: 14px;font-weight: 600; color: #767676;">Résultat : </a>
+														<ul>
+															<?php
+																			while ($a = $table_produits->fetch()) {
+																				?>
+																<li style="color:black;"><a href="front.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
+															<?php
+																			}
+																			?>
+														</ul>
+													</li>
+												</ul>
+											<?php
+														} else {
+															?>
+												Aucun résultat pour: <?= $q ?>...
+										<?php	}
+												}	?>
+										<?php
+												if (empty($_POST['q'])) {
+													?>
+											Aucun recherche pour: ...
+										<?php	}	?>
+
 									</div>
 								</div>
 							</div>
@@ -427,89 +478,89 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 
 									<!-- Product -->
 									<?php
-                                        foreach ($Liste_produits as $row) {
-                                            ?>
+											foreach ($Liste_produits as $row) {
+												?>
+										<div class="product">
+											<div class="product_image"><img id="taswira" src="../attachment/<?php echo $row["Prod_File"]; ?>" /></div>
+											<div class="product_extra product_new"><a href="categories.php">New</a></div>
+											<div class="product_content">
+												<div class="product_title"><a href="product.php"><?PHP echo $row['Categorie'];   ?></a></div>
+												<div class="product_price"><?PHP echo $row['Prix'];   ?></div>
+											</div>
+										</div>
+									<?PHP
+											}
+											?>
+									<!-- Product -->
 									<div class="product">
-										<div class="product_image"><img id="taswira" src="../attachment/<?php echo $row["Prod_File"]; ?>"/></div>
-										<div class="product_extra product_new"><a href="categories.php">New</a></div>
+										<div class="product_image"><img src="images/product_2.jpg" alt=""></div>
+										<div class="product_extra product_sale"><a href="categories.php">Sale</a></div>
 										<div class="product_content">
-											<div class="product_title"><a href="product.php"><?PHP echo $row['Categorie'];   ?></a></div>
-											<div class="product_price"><?PHP echo $row['Prix'];   ?></div>
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
 										</div>
 									</div>
-									<?PHP
-                                        }
-										?>
-										<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_2.jpg" alt=""></div>
-							<div class="product_extra product_sale"><a href="categories.php">Sale</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
+
+									<!-- Product -->
+									<div class="product">
+										<div class="product_image"><img src="images/product_3.jpg" alt=""></div>
+										<div class="product_content">
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
+										</div>
+									</div>
+
+									<!-- Product -->
+									<div class="product">
+										<div class="product_image"><img src="images/product_4.jpg" alt=""></div>
+										<div class="product_content">
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
+										</div>
+									</div>
+
+									<!-- Product -->
+									<div class="product">
+										<div class="product_image"><img src="images/product_5.jpg" alt=""></div>
+										<div class="product_content">
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
+										</div>
+									</div>
+
+									<!-- Product -->
+									<div class="product">
+										<div class="product_image"><img src="images/product_6.jpg" alt=""></div>
+										<div class="product_extra product_hot"><a href="categories.php">Hot</a></div>
+										<div class="product_content">
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
+										</div>
+									</div>
+
+									<!-- Product -->
+									<div class="product">
+										<div class="product_image"><img src="images/product_7.jpg" alt=""></div>
+										<div class="product_content">
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
+										</div>
+									</div>
+
+									<!-- Product -->
+									<div class="product">
+										<div class="product_image"><img src="images/product_8.jpg" alt=""></div>
+										<div class="product_extra product_sale"><a href="categories.php">Hot</a></div>
+										<div class="product_content">
+											<div class="product_title"><a href="product.php">Smart Phone</a></div>
+											<div class="product_price">$670</div>
+										</div>
+									</div>
+
+								</div>
+
 							</div>
 						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_3.jpg" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_4.jpg" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_5.jpg" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_6.jpg" alt=""></div>
-							<div class="product_extra product_hot"><a href="categories.php">Hot</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_7.jpg" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="images/product_8.jpg" alt=""></div>
-							<div class="product_extra product_sale"><a href="categories.php">Hot</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.php">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-					</div>
-						
-					</div>	
-				</div>
 					</div>
 				</div>
 
@@ -612,7 +663,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 						<div class="row">
 							<div class="col">
 								<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-								<div class="footer_logo"><a href="#">Prodigy</a></div>
+									<div class="footer_logo"><a href="#">Prodigy</a></div>
 									<div class="footer_social ml-lg-auto">
 										<ul>
 											<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>

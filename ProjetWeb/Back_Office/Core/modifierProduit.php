@@ -97,7 +97,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							url: "../View/readCategorie.php",
 							data: 'keyword=' + $(this).val(),
 							beforeSend: function() {
-								$("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+								$("#search-box").css("background", "#FFF url(../View/LoaderIcon.gif) no-repeat 165px");
 							},
 							success: function(data) {
 								$("#suggesstion-box").show();
@@ -150,7 +150,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 									Categorie
 								</span>
 								<div class="frmSearch" data-validate="Categorie is required">
-									<input type="text" id="search-box" name="Categorie" autocomplete="off" value="<?PHP echo $row['Categorie'] ?>" />
+									<input type="text" id="search-box" name="Categorie" autocomplete="off" value="<?PHP echo $row['Categorie'] ?>" placeholder="Categorie Name" />
 									<div id="suggesstion-box"></div>
 								</div>
 								<br>
