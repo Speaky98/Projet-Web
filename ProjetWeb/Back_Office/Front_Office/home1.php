@@ -23,7 +23,6 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		$row = $req->fetch();
 
 			/*	$table_produits1 = $conn->prepare('SELECT * FROM table_produits where Identifiant=:Identifiant');
-			
 			$table_produits1->bindValue(':Identifiant', $_GET['Identifiant']);
 
 		$table_produits1->execute();
