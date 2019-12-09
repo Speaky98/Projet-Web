@@ -1,7 +1,7 @@
 <?php
-include '../Core/produitC.PHP';
-include '../Core/UserC.php';
-include '../Entities/userfirst.php';
+include 'Core/produitC.PHP';
+include 'Core/UserC.php';
+include 'Entities/userfirst.php';
 session_start();
 
 
@@ -53,7 +53,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							<nav class="main_nav" style="margin-left: 80px;">
 								<ul>
 									<li class="hassubs active">
-										<a href="home1.php">Téléphone</a>
+										<a href="index.php">Téléphone</a>
 										<ul>
 											<li><a href="categories.php">Smartphone</a></li>
 											<li><a href="product.php">Tel fixe</a></li>
@@ -154,8 +154,8 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 								<li class="hassubs" style="margin-top: 12%;">
 									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
-										<li><a style="color:black;" href="../Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
-											<li><a style="color:black;" href="../Session/logout.php">Déconnecter</a></li>
+										<li><a style="color:black;" href="Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
+											<li><a style="color:black;" href="Session/logout.php">Déconnecter</a></li>
 					
 										</ul>
 									</li>
@@ -208,7 +208,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 				</div>
 				<ul class="page_menu_nav menu_mm">
 					<li class="page_menu_item has-children menu_mm">
-						<a href="home1.php">Téléphone<i class="fa fa-angle-down"></i></a>
+						<a href="index.php">Téléphone<i class="fa fa-angle-down"></i></a>
 						<ul class="page_menu_selection menu_mm">
 							<li class="page_menu_item menu_mm"><a href="categories.php">Smartphone<i class="fa fa-angle-down"></i></a></li>
 							<li class="page_menu_item menu_mm"><a href="product.php">Tel fixe<i class="fa fa-angle-down"></i></a></li>
@@ -291,7 +291,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							<div class="home_content">
 								<div class="breadcrumbs">
 									<ul>
-										<li><a href="home1.php">Téléphone</a></li>
+										<li><a href="index.php">Téléphone</a></li>
 										<li><a href="cart.php">Shopping Cart</a></li>
 										<li>Checkout</li>
 									</ul>
@@ -517,7 +517,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 }
 else { 
 	echo 'Veuillez vous connecter </br>';  
-	echo '<a href="../index.php">Cliquer pour se connecter</a>';
+	echo '<a href="home1_2.php">Cliquer pour se connecter</a>';
 
 }
 ?>

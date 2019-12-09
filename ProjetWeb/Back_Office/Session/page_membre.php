@@ -19,8 +19,8 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 	if(strcmp($_SESSION['r'], 'Client') == 0)
 {
       /*echo 'Veuillez vous connecter </br>';  
-	  echo '<a href="../index.php">Cliquer pour se connecter</a>';*/
-	  header("location:../Front_Office/home1.php");
+	  echo '<a href="../home1_2.php">Cliquer pour se connecter</a>';*/
+	  header("location:../index.php");
 
 }  }
 ?>

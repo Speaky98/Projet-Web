@@ -105,7 +105,7 @@ $row=$req->fetch();
 					<div class="container-login100-form-btn" style="
 					margin-left: 80%;
 					margin-top: -7%;">
-						<a href="../Front_Office/home1.php"><h5 style="text-align: right; font-weight: bold; font-size: .88rem;">abort the change</h5></a>
+						<a href="../index.php"><h5 style="text-align: right; font-weight: bold; font-size: .88rem;">abort the change</h5></a>
 					</div>
 				</form>
 			</div>
@@ -138,7 +138,7 @@ $row=$req->fetch();
 }
 else { 
 	echo 'Veuillez vous connecter </br>';  
-	echo '<a href="../index.php">Cliquer pour se connecter</a>';
+	echo '<a href="../home1_2.php">Cliquer pour se connecter</a>';
 
 }
 ?>

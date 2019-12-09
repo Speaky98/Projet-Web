@@ -824,7 +824,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
 }
 else { 
 	echo 'Veuillez vous connecter </br>';  
-	echo '<a href="index.php">Cliquer pour se connecter</a>';
+	echo '<a href="home1_2.php">Cliquer pour se connecter</a>';
 
 }
 ?>

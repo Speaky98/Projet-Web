@@ -12,7 +12,7 @@ include '../Entities/userfirst.php';
     $UserC->Ajouter_User($Userfirst);
     //echo "<script type='text/javascript'> document.location = '../tables-regular.PHP'; </script>";
     header('Status: 301 Moved Permanently', false, 301);      
-  header('Location: ../index.PHP');      
+  header('Location: ../home1_2.php');      
   exit();
    
 

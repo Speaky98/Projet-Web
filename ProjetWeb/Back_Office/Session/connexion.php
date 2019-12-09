@@ -29,11 +29,11 @@
 		}
 		if ($vide == false) {
 			echo '<body onLoad="alert(\'Membre non reconnu...\')">';
-			echo '<meta http-equiv="refresh" content="0;URL=../index.php">';
+			echo '<meta http-equiv="refresh" content="0;URL=../home1_2.php">';
 		}
 	} else {
 		echo "Les variables du formulaire ne sont pas déclarées.<br> Vous devez remplir le formulaire";
-		?> <a href="../index.php">Retour au formulaire</a> <?php
+		?> <a href="../home1_2.php">Retour au formulaire</a> <?php
 														}
 
 														?>
