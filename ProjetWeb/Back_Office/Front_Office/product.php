@@ -47,13 +47,11 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 	<header class="header">
 		<div class="header_container">
 			<div class="container" >
-				<div class="row" style="
-    margin-inline-end: auto;
-">
+				<div class="row" style="margin-inline-end: auto;">
 					<<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="#">Prodigy</a></div>
-							<nav class="main_nav">
+							<div class="logo"><a href="#" style="margin-left: -5.9px;">Prodigy</a></div>
+							<nav class="main_nav" style="margin-left: 80px;">
 								<ul>
 									<li class="hassubs active">
 										<a href="home1.php">Téléphone</a>
@@ -135,7 +133,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 								<div class="search">
 									<div class="search_icon">
 										<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-										viewBox="0 0 475.084 475.084" style="padding-left: 120;enable-background:new 0 0 475.084 475.084;"
+										viewBox="0 0 475.084 475.084" style="enable-background:new 0 0 475.084 475.084;"
 										 xml:space="preserve">
 										<g>
 											<path d="M464.524,412.846l-97.929-97.925c23.6-34.068,35.406-72.047,35.406-113.917c0-27.218-5.284-53.249-15.852-78.087
@@ -154,7 +152,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 									</div>
 								</div>
 								<ul>
-								<li class="hassubs">
+								<li class="hassubs" style="margin-top: 12%;">
 									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
 										<li><a style="color:black;" href="../Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
@@ -177,9 +175,10 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 				<div class="row">
 					<<div class="col">
 						<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-							<form action="#">
-								<input type="text" class="search_input" placeholder="Search" required="required">
-							</form>
+						<form method="POST" style="margin-right: 3%;">
+											<input type="search" name="q" class="search_input" autocomplete="off" placeholder="Search" required="required">
+											<input hidden type="submit" value="Valider" />
+										</form>
 						</div>
 					</div>
 				</div>

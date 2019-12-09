@@ -174,9 +174,10 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 				<div class="row">
 					<div class="col">
 						<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-							<form action="#">
-								<input type="text" class="search_input" placeholder="Search" required="required">
-							</form>
+						<form method="POST" style="margin-right: 3%;">
+											<input type="search" name="q" class="search_input" autocomplete="off" placeholder="Search" required="required">
+											<input hidden type="submit" value="Valider" />
+										</form>
 						</div>
 					</div>
 				</div>

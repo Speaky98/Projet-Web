@@ -1,5 +1,5 @@
 <?PHP
-//include('C:\wamp64\www\ProjetWeb\ProjetWeb\Back_Office\config.php');
+
 include 'C:\wamp64\www\ProjetWeb\ProjetWeb\Back_Office\Session\dbconfig.php';
 
 class UserC
@@ -54,12 +54,11 @@ try {
 function Supprimer_User($user_idd)
 
     {
-      
+        require_once("../Config.php");
         if(isset($_POST["user_idd"]) && !empty($_POST["user_idd"])){
             $sql = "DELETE FROM table_users WHERE user_idd =:user_idd";
-            $c=new Database();
-            $conn=$c->connexion();
-            if($stmt = $conn->prepare($sql)){
+            $db=config ::getConnexion();
+            if($stmt = $db->prepare($sql)){
                 $stmt->bindValue(":user_idd", $user_idd);
                 
                
@@ -75,7 +74,7 @@ function Supprimer_User($user_idd)
             
             $stmt->close();
     
-            $conn->close();
+            $db->close();
         } else{
        
             if(empty(trim($_GET["user_idd"]))){

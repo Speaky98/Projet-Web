@@ -62,12 +62,12 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 			<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 			<link rel="stylesheet" type="text/css" href="styles/responsive.css">
 			<style type="text/css">
-				#taswira {
+				/*#taswira {
 					float: left;
 					margin: 5px;
 					width: 340px;
 					height: 240px;
-				}
+				}*/
 			</style>
 		</head>
 
@@ -480,10 +480,10 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 											foreach ($Liste_produits as $row) {
 												?>
 										<div class="product">
-											<div class="product_image"><img id="taswira" src="../attachment/<?php echo $row["Prod_File"]; ?>" /></div>
+											<div class="product_image"><img src="../attachment/<?php echo $row["Prod_File"]; ?>" /></div>
 											<div class="product_extra product_new"><a href="categories.php">New</a></div>
 											<div class="product_content">
-												<div class="product_title"><a href="product.php"><?PHP echo $row['Categorie'];   ?></a></div>
+												<div class="product_title"><a href="product.php"><?PHP echo $row['Nom'];   ?></a></div>
 												<div class="product_price"><?PHP echo $row['Prix'];   ?></div>
 											</div>
 										</div>

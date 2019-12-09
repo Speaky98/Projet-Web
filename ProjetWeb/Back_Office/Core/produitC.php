@@ -126,17 +126,19 @@ $row=$req->fetch();
 		
 	}*/
 
-	function Modifier_Produit($Identifiant, $Nom, $Prix, $Categorie, $Marque) {
+	function Modifier_Produit($Identifiant, $Nom, $Prix, $Categorie, $Marque, $Prod_File) {
         $msg = "";
 
-
-        if (isset($_FILES['Prod_File']['name']) && $_FILES['Prod_File']['name']!="")
+        $Prod_File = $_FILES['Prod_File']['name'];
+        $Prod_File_tmp = $_FILES['Prod_File']['tmp_name'];
+        if ($Prod_File_tmp!="")
         {
-            
-            $Prod_File = $_FILES['Prod_File']['name'];
-            
-            $target = "../attachment/".basename($Prod_File);
-
+             $target = "../attachment/".basename($Prod_File);
+            if (move_uploaded_file($_FILES['Prod_File']['tmp_name'], $target)) {
+                $msg ="Image uploaded successfully";
+            }else{
+                $msg = "Failed to upload image";
+            }
         $sql = "UPDATE table_produits SET 
 						Nom = :Nom,
 						Prix = :Prix,
@@ -145,6 +147,16 @@ $row=$req->fetch();
                         Prod_File='$target'
                         where Identifiant =:Identifiant ";	
                         $db =config ::getConnexion();
+        }
+        else{
+            $sql = "UPDATE table_produits SET 
+            Nom = :Nom,
+            Prix = :Prix,
+            Categorie = :Categorie,
+            Marque = :Marque
+            where Identifiant =:Identifiant ";	
+            $db =config ::getConnexion(); 
+        }
                 try {   
                    
                     $req=$db->prepare($sql); 
@@ -154,17 +166,11 @@ $row=$req->fetch();
                     $req->bindValue(':Categorie',$Categorie);
                      $req->bindValue(':Marque',$Marque);
                     $req->execute();
-                    if (move_uploaded_file($_FILES['Prod_File']['tmp_name'], $target)) {
-                        $msg ="Image uploaded successfully";
-                    }else{
-                        $msg = "Failed to upload image";
-                    }
             
             }catch (Exception $e)
             {
                 echo "Erreur ".$e->getMessage();
             }
-	}
     }
 
 }
