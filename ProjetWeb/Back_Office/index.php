@@ -509,8 +509,8 @@ $verif=1;
 											<div class="product_image"><img src="attachment/<?php echo $row["Prod_File"]; ?>" /></div>
 											<div class="product_extra product_new"><a href="categories.php">New</a></div>
 											<div class="product_content">
-												<div class="product_title"><a href="product.php"><?PHP echo $row['Nom'];   ?></a></div>
-												<div class="product_price"><?PHP echo $row['Prix'];   ?></div>
+												<div class="product_title"><a href="product.php?Identifiant=<?PHP echo $row['Identifiant']; ?>"><?PHP echo $row['Nom'];   ?></a></div>
+												<div class="product_price"><?PHP echo $row['Prix'];   ?>Dt</div>
 											</div>
 										</div>
 									<?PHP

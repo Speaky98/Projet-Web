@@ -201,7 +201,7 @@ if ($count > 0) {
         ?>
     
         <tr>
-                <td><img class="product-thumb" src="<?php echo $row['Prod_File']; ?>" /><?php echo $row['Nom']; ?></td>
+                <td><img class="product-thumb" src="<?php echo $row['Prod_File']; ?>" /><a href="../product.php?Identifiant=<?PHP echo $row['Identifiant']; ?>"><?php echo $row['Nom']; ?></a></td>
                 <td><?php echo $row['Identifiant']; ?></td>
                 <td class='text-right'><?php echo $row['Prix']; ?></td>
             </tr>

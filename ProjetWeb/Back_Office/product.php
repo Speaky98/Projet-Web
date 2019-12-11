@@ -2,6 +2,7 @@
 include 'Core/produitC.PHP';
 include 'Core/UserC.php';
 include 'Entities/userfirst.php';
+include 'Entities/produit.php';
 session_start();
 
 
@@ -21,6 +22,16 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		$req->execute();
 
 		$row = $req->fetch();
+
+		$sql1 = 'SELECT * FROM table_produits WHERE Identifiant=:Identifiant';
+
+		$req1 = $conn->prepare($sql1);
+
+		$req1->bindValue(':Identifiant', $_GET['Identifiant']);
+
+		$req1->execute();
+
+		$row1 = $req1->fetch();
 		?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +59,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		<div class="header_container">
 			<div class="container" >
 				<div class="row" style="margin-inline-end: auto;">
-					<<div class="col">
+					<div class="col" style="margin-left: 6px;">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo"><a href="#" style="margin-left: -5.9px;">Prodigy</a></div>
 							<nav class="main_nav" style="margin-left: 80px;">
@@ -178,7 +189,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		<div class="search_panel trans_300">
 			<div class="container">
 				<div class="row">
-					<<div class="col">
+					<div class="col">
 						<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
 						<form method="POST" style="margin-right: 3%;">
 											<input type="search" name="q" class="search_input" autocomplete="off" placeholder="Search" required="required">
@@ -293,7 +304,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 			<div class="home_content_container">
 				<div class="container">
 					<div class="row">
-						<<div class="col">
+						<div class="col">
 							<div class="home_content">
 								<div class="home_title">Smart Phones<span>.</span></div>
 								<div class="home_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p></div>
@@ -309,17 +320,18 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 
 	<div class="product_details">
 		<div class="container">
+		<div class="row">
 			<div class="row details_row">
 
 				<!-- Product Image -->
 				<div class="col-lg-6">
 					<div class="details_image">
-						<div class="details_image_large"><img src="images/details_1.jpg" alt=""><div class="product_extra product_new"><a href="categories.php">New</a></div></div>
+						<div class="details_image_large"><img src="attachment/<?php echo $row1["Prod_File"]; ?>" alt=""><div class="product_extra product_new"><a href="categories.php">New</a></div></div>
 						<div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-							<div class="details_image_thumbnail active" data-image="images/details_1.jpg"><img src="images/details_1.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="images/details_2.jpg"><img src="images/details_2.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="images/details_3.jpg"><img src="images/details_3.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="images/details_4.jpg"><img src="images/details_4.jpg" alt=""></div>
+							<div class="details_image_thumbnail active" data-image="attachment/<?php echo $row1["Prod_File"]; ?>"><img src="attachment/<?php echo $row1["Prod_File"]; ?>" alt=""></div>
+							<div class="details_image_thumbnail" data-image="attachment/<?php echo $row1["Prod_File"]; ?>"><img src="attachment/<?php echo $row1["Prod_File"]; ?>" alt=""></div>
+							<div class="details_image_thumbnail" data-image="attachment/<?php echo $row1["Prod_File"]; ?>"><img src="attachment/<?php echo $row1["Prod_File"]; ?>" alt=""></div>
+							<div class="details_image_thumbnail" data-image="attachment/<?php echo $row1["Prod_File"]; ?>"><img src="attachment/<?php echo $row1["Prod_File"]; ?>" alt=""></div>
 						</div>
 					</div>
 				</div>
@@ -327,10 +339,9 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 				<!-- Product Content -->
 				<div class="col-lg-6">
 					<div class="details_content">
-						<div class="details_name">Smart Phone</div>
-						<div class="details_discount">$890</div>
-						<div class="details_price">$670</div>
-
+						<div class="details_name"><?php echo $row1["Nom"]; ?></div>
+						<div class="details_discount"><?php echo $row1["Prix"]; ?>Dt</div>
+						<div class="details_price">4000.00Dt</div>
 						<!-- In Stock -->
 						<div class="in_stock_container">
 							<div class="availability">Availability:</div>
@@ -366,9 +377,10 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 					</div>
 				</div>
 			</div>
+			
 
 			<div class="row description_row">
-				<<div class="col">
+				<div class="col">
 					<div class="description_title_container">
 						<div class="description_title">Description</div>
 						<div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
@@ -378,6 +390,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 
@@ -391,7 +404,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 				</div>
 			</div>
 			<div class="row">
-				<<div class="col">
+				<div class="col">
 					
 					<div class="product_grid">
 
@@ -444,7 +457,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 	<div class="newsletter">
 		<div class="container">
 			<div class="row">
-				<<div class="col">
+				<div class="col">
 					<div class="newsletter_border"></div>
 				</div>
 			</div>
@@ -472,7 +485,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		<div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
 		<div class="container">
 			<div class="row">
-				<<div class="col">
+				<div class="col">
 					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
 						<div class="footer_logo"><a href="#">Prodigy</a></div>
 						<div class="footer_social ml-lg-auto">
