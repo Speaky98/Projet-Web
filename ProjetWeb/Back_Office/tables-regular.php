@@ -763,7 +763,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p']))
                                                 <tr>
                                                     <th> <?PHP echo $row['Identifiant'];   ?></th>
                                                     <td> <?PHP echo $row['Nom'];   ?></td>
-                                                    <td> <?PHP echo $row['Prix'];   ?></td>
+                                                    <td> <?PHP echo $row['Prix'];   ?>Dt</td>
                                                     <td> <?PHP echo $row['Categorie'];   ?></td>
                                                     <td> <?PHP echo $row['Marque'];   ?></td>
                                                     <td> <img id="taswira" src="attachment/<?php echo $row["Prod_File"]; ?>"/></td>

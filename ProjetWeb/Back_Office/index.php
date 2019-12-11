@@ -62,6 +62,9 @@ $verif=1;
 			<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 			<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 			<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 			<style type="text/css">
 				/*#taswira {
 					float: left;
@@ -69,6 +72,11 @@ $verif=1;
 					width: 340px;
 					height: 240px;
 				}*/
+				.filtre{
+					width: 100%;
+    background: #FFFFFF;
+    z-index: 2;
+				}
 			</style>
 		</head>
 
@@ -182,9 +190,10 @@ $verif=1;
 													</svg>
 												</div>
 											</div>
+											<nav class="main_nav">
 											<ul>
-												<li class="hassubs" style="margin-top: 12%;">
-													<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?></a>
+												<li class="hassubs" style="margin-top: 23%;margin-left: -20%;">
+													<a style="font-weight: bold; color:black;" href=""><?php echo $_SESSION['l']; ?></a>
 													<ul>
 														<li><a style="color:black;" href="Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
 														<li><a style="color:black;" href="Session/logout.php">Se Déconnecter</a></li>
@@ -192,6 +201,7 @@ $verif=1;
 													</ul>
 												</li>
 											</ul>
+											</nav>
 											<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 										</div>
 									</div>
@@ -460,7 +470,22 @@ $verif=1;
 						</div>
 					</div>
 				</div>
-
+				<div class="filtre">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<form method="POST" action="Core/Produit_filtrant.php" >
+			<div style="margin-left: 12%;margin-top: 3%;MARGIN-INLINE-START: AUTO;">
+		<input type="submit" value="Filtres" name="view" id="filtre" data-toggle="modal" class="btn-shadow dropdown-toggle btn btn-info test" data-target="#dataModal" style="background-color: #6c6a74;border-color: #dbdbdb;">
+		<!-- <a href="Core/Produit_filtrant.php" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-default">
+    Launch Modal
+</a>-->
+	</div>
+	</form>
+	</div>
+	</div>
+					</div>
+				</div>
 				<!-- Products -->
 				<?PHP
 						$ProduitC = new ProduitC();
@@ -695,6 +720,30 @@ $verif=1;
 		</body>
 
 		</html>
+
+		<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="width:980px;">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$("#myModal").on("show.bs.modal", function(e) {
+    var link = $(e.relatedTarget);
+    $(this).find(".modal-body").load(link.attr("href"));
+});
+	</script>-->
 <?php
 	}
 }
@@ -858,8 +907,12 @@ if ($verif!=1) {
 													</svg>
 												</div>
 											</div>
-													<a style="font-weight: bold; color:black; margin-top: 12%;" href="home1_2.php">Connecter</a>
-											<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+											<ul>
+												<li class="hassubs" style="margin-top: 12%;margin-left: 63.7px;">
+													<a style="font-weight: bold; color:black;" href="home1_2.php">Connecter</a>
+													</li>
+											</ul>
+											<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>										
 										</div>
 									</div>
 								</div>

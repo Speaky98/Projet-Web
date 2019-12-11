@@ -114,7 +114,10 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 								</ul>
 							</nav>
 							<div class="header_extra ml-auto">
-								<div class="shopping_cart">
+							<div class="shopping_cart" style="
+    margin-left: 17.1%;
+    margin-bottom: 3%;
+">
 									<a href="cart.php">
 										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 												 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
@@ -150,16 +153,18 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 									</svg>
 									</div>
 								</div>
+								<nav class="main_nav">
 								<ul>
-								<li class="hassubs" style="margin-top: 12%;">
-									<a style="font-weight: bold; color:black;"><?php echo $_SESSION['l']; ?>	</a>
+								<li class="hassubs" style="margin-top: 33%;margin-left: -150%;">
+									<a style="font-weight: bold; color:black;" href=""><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
-											<li><a style="color:black;" href="Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
-											<li><a href="Session/logout.php">Déconnecter</a></li>
-										
+										<li><a style="color:black;" href="Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
+											<li><a style="color:black;" href="Session/logout.php">Déconnecter</a></li>
+					
 										</ul>
 									</li>
 									</ul>
+									</nav>
 								<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 							</div>
 						</div>

@@ -127,7 +127,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 									Prix
 								</span>
 								<div class="wrap-input100 validate-input m-b-36" data-validate="Prix is required">
-									<input class="input100" type="text" name="Prix">
+									<input class="input100" type="" name="Prix">
 									<span class="focus-input100"></span>
 								</div>
 								<span class="txt1 p-b-11">
