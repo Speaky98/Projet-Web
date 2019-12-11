@@ -32,6 +32,22 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		$req1->execute();
 
 		$row1 = $req1->fetch();
+
+		if (isset($_POST['q']) and !empty($_POST['q'])) {
+
+			$q = htmlspecialchars($_POST['q']);
+
+			$table_produits = $conn->prepare('SELECT Nom,Categorie,Marque,Identifiant FROM table_produits WHERE Nom LIKE "%' . $q . '%" ORDER BY Identifiant DESC');
+
+			$table_produits->execute();
+
+			if ($table_produits->rowCount() == 0) {
+
+				$table_produits = $conn->prepare('SELECT Nom,Categorie,Marque,Identifiant FROM table_produits WHERE CONCAT(Nom, Categorie, Marque) LIKE "%' . $q . '%" ORDER BY Identifiant DESC');
+
+				$table_produits->execute();
+			}
+		}
 		?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,15 +129,34 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 											<li ><a href="categories.php">Category</a></li>
 										</ul>
 									</li>
-									<li class="hassubs">
-										<a href="">EspaceClient</a>
-										<ul >
-											<li ><a href="categories.php">Category</a></li>
-											<li ><a href="categories.php">Category</a></li>
-											<li ><a href="categories.php">Category</a></li>
-											<li ><a href="categories.php">Category</a></li>
-										</ul>
-									</li>
+									<?php
+                                    if(isset($_SESSION['user_email']))
+                                    {
+                                        ?>
+                                        <li class="hassubs active">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="forum.php">Forum</a></li>
+                                                <li ><a href="deconnexion.php">Deconnexion</a></li>
+                                                <li ><a href="profil.php">Profil</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <li class="hassubs active">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="authentification.php">Inscription</a></li>
+                                                <li ><a href="login.php">Connexion</a></li>
+                                                <li ><a href="forum.php">Forum</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
 									<li><a href="contact.php">Contact</a></li>
 								</ul>
 							</nav>
@@ -195,6 +230,35 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 											<input type="search" name="q" class="search_input" autocomplete="off" placeholder="Search" required="required">
 											<input hidden type="submit" value="Valider" />
 										</form>
+										<?php
+												if (isset($_POST['q'])) {
+													if ($table_produits->rowCount() > 0) {
+														?>
+												<ul>
+													<li class="hassubs" style=" margin-top: 85%;">
+														<a style="font-size: 14px;font-weight: 600; color: #767676;">Résultat : </a>
+														<ul>
+															<?php
+																			while ($a = $table_produits->fetch()) {
+																				?>
+																<li style="color:black;"><a  href="product.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
+															<?php
+																			}
+																			?>
+														</ul>
+													</li>
+												</ul>
+											<?php
+														} else {
+															?>
+												Aucun résultat pour: <?= $q ?>...
+										<?php	}
+												}	?>
+										<?php
+												if (empty($_POST['q'])) {
+													?>
+											Aucun recherche pour: ...
+										<?php	}	?>
 						</div>
 					</div>
 				</div>

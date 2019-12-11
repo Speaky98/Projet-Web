@@ -21,6 +21,22 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 		$req->execute();
 
 		$row = $req->fetch();
+
+		if (isset($_POST['q']) and !empty($_POST['q'])) {
+
+			$q = htmlspecialchars($_POST['q']);
+
+			$table_produits = $conn->prepare('SELECT Nom,Categorie,Marque,Identifiant FROM table_produits WHERE Nom LIKE "%' . $q . '%" ORDER BY Identifiant DESC');
+
+			$table_produits->execute();
+
+			if ($table_produits->rowCount() == 0) {
+
+				$table_produits = $conn->prepare('SELECT Nom,Categorie,Marque,Identifiant FROM table_produits WHERE CONCAT(Nom, Categorie, Marque) LIKE "%' . $q . '%" ORDER BY Identifiant DESC');
+
+				$table_produits->execute();
+			}
+		}
 		?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +68,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							<div class="logo"><a href="#">Prodigy</a></div>
 							<nav class="main_nav" style="margin-left: 80px;">
 								<ul>
-									<li class="hassubs active">
+									<li class="hassubs">
 										<a href="index.php">Téléphone</a>
 										<ul>
 											<li><a href="categories.php">Smartphone</a></li>
@@ -93,7 +109,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="">Image & son</a>
+										<a href="categories.php">Image & son</a>
 										<ul >
 											<li ><a href="categories.php">Category</a></li>
 											<li ><a href="categories.php">Category</a></li>
@@ -101,23 +117,39 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 											<li ><a href="categories.php">Category</a></li>
 										</ul>
 									</li>
-									<li class="hassubs">
-										<a href="">EspaceClient</a>
-										<ul >
-											<li ><a href="categories.php">Category</a></li>
-											<li ><a href="categories.php">Category</a></li>
-											<li ><a href="categories.php">Category</a></li>
-											<li ><a href="categories.php">Category</a></li>
-										</ul>
-									</li>
+									<?php
+                                    if(isset($_SESSION['user_email']))
+                                    {
+                                        ?>
+                                        <li class="hassubs">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="forum.php">Forum</a></li>
+                                                <li ><a href="deconnexion.php">Deconnexion</a></li>
+                                                <li ><a href="profil.php">Profil</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <li class="hassubs">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="authentification.php">Inscription</a></li>
+                                                <li ><a href="login.php">Connexion</a></li>
+                                                <li ><a href="forum.php">Forum</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
 									<li><a href="contact.php">Contact</a></li>
 								</ul>
 							</nav>
 							<div class="header_extra ml-auto">
-								<div class="shopping_cart" style="
-    margin-left: 17.1%;
-    margin-bottom: 3%;
-">
+								<div class="shopping_cart" >
 									<a href="cart.php">
 										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 												 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
@@ -155,7 +187,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 								</div>
 								<nav class="main_nav">
 								<ul>
-								<li class="hassubs" style="margin-top: 33%;margin-left: -150%;">
+								<li class="hassubs" style="margin-top: 23%;margin-left: -20%;">
 									<a style="font-weight: bold; color:black;" href=""><?php echo $_SESSION['l']; ?>	</a>
 										<ul >
 										<li><a style="color:black;" href="Core/ModifierUser.php?user_idd=<?PHP echo $row['user_idd']; ?>" class="btn btn-info">Modifier Votre Profile</a></li>
@@ -183,6 +215,35 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 											<input type="search" name="q" class="search_input" autocomplete="off" placeholder="Search" required="required">
 											<input hidden type="submit" value="Valider" />
 										</form>
+										<?php
+												if (isset($_POST['q'])) {
+													if ($table_produits->rowCount() > 0) {
+														?>
+												<ul>
+													<li class="hassubs" style=" margin-top: 85%;">
+														<a style="font-size: 14px;font-weight: 600; color: #767676;">Résultat : </a>
+														<ul>
+															<?php
+																			while ($a = $table_produits->fetch()) {
+																				?>
+																<li style="color:black;"><a  href="product.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
+															<?php
+																			}
+																			?>
+														</ul>
+													</li>
+												</ul>
+											<?php
+														} else {
+															?>
+												Aucun résultat pour: <?= $q ?>...
+										<?php	}
+												}	?>
+										<?php
+												if (empty($_POST['q'])) {
+													?>
+											Aucun recherche pour: ...
+										<?php	}	?>
 						</div>
 					</div>
 				</div>

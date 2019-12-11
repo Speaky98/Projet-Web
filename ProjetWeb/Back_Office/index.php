@@ -143,16 +143,34 @@ $verif=1;
 														<li><a href="categories.php">Category</a></li>
 														<li><a href="categories.php">Category</a></li>
 													</ul>
-												</li>
-												<li class="hassubs">
-													<a href="">EspaceClient</a>
-													<ul>
-														<li><a href="categories.php">Category</a></li>
-														<li><a href="categories.php">Category</a></li>
-														<li><a href="categories.php">Category</a></li>
-														<li><a href="categories.php">Category</a></li>
-													</ul>
-												</li>
+												</li><?php
+                                    if(isset($_SESSION['user_email']))
+                                    {
+                                        ?>
+                                        <li class="hassubs">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="forum.php">Forum</a></li>
+                                                <li ><a href="deconnexion.php">Deconnexion</a></li>
+                                                <li ><a href="profil.php">Profil</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <li class="hassubs">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="authentification.php">Inscription</a></li>
+                                                <li ><a href="login.php">Connexion</a></li>
+                                                <li ><a href="forum.php">Forum</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
 												<li><a href="contact.php">Contact</a></li>
 											</ul>
 										</nav>
@@ -231,7 +249,7 @@ $verif=1;
 															<?php
 																			while ($a = $table_produits->fetch()) {
 																				?>
-																<li style="color:black;"><a href="front.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
+																<li style="color:black;"><a  href="product.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
 															<?php
 																			}
 																			?>
@@ -860,16 +878,34 @@ if ($verif!=1) {
 														<li><a href="categories.php">Category</a></li>
 														<li><a href="categories.php">Category</a></li>
 													</ul>
-												</li>
-												<li class="hassubs">
-													<a href="">EspaceClient</a>
-													<ul>
-														<li><a href="categories.php">Category</a></li>
-														<li><a href="categories.php">Category</a></li>
-														<li><a href="categories.php">Category</a></li>
-														<li><a href="categories.php">Category</a></li>
-													</ul>
-												</li>
+												</li><?php
+                                    if(isset($_SESSION['user_email']))
+                                    {
+                                        ?>
+                                        <li class="hassubs">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="forum.php">Forum</a></li>
+                                                <li ><a href="deconnexion.php">Deconnexion</a></li>
+                                                <li ><a href="profil.php">Profil</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <li class="hassubs">
+                                            <a href="">EspaceClient</a>
+                                            <ul >
+                                                <li ><a href="authentification.php">Inscription</a></li>
+                                                <li ><a href="login.php">Connexion</a></li>
+                                                <li ><a href="forum.php">Forum</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
 												<li><a href="contact.php">Contact</a></li>
 											</ul>
 										</nav>
@@ -941,7 +977,7 @@ if ($verif!=1) {
 															<?php
 																			while ($a = $table_produits->fetch()) {
 																				?>
-																<li style="color:black;"><a href="front.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
+																<li style="color:black;"><a  href="product.php?Identifiant=<?PHP echo $a['Identifiant']; ?>"><?= $a['Nom'] ?> <?= $a['Marque'] ?></a></li>
 															<?php
 																			}
 																			?>
