@@ -812,6 +812,11 @@ if ($verif!=1) {
 					width: 340px;
 					height: 240px;
 				}*/
+				.filtre{
+					width: 100%;
+    background: #FFFFFF;
+    z-index: 2;
+				}
 			</style>
 		</head>
 
@@ -1214,6 +1219,22 @@ if ($verif!=1) {
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="filtre">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<form method="POST" action="Core/Produit_filtrant.php" >
+			<div style="margin-left: 12%;margin-top: 3%;MARGIN-INLINE-START: AUTO;">
+		<input type="submit" value="Filtres" name="view" id="filtre" data-toggle="modal" class="btn-shadow dropdown-toggle btn btn-info test" data-target="#dataModal" style="background-color: #6c6a74;border-color: #dbdbdb;">
+		<!-- <a href="Core/Produit_filtrant.php" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-default">
+    Launch Modal
+</a>-->
+	</div>
+	</form>
+	</div>
+	</div>
 					</div>
 				</div>
 

@@ -425,7 +425,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="#">Add to cart</a></div>
+							<div class="button cart_button"><a href="cart.php?Identifiant=<?PHP echo $row1['Identifiant']; ?>">Add to cart</a></div>
 						</div>
 
 						<!-- Share -->

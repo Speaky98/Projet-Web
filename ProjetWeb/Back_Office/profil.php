@@ -328,7 +328,7 @@ $commentaireGestion= new commentaireCrud($bd);
                             $compteArray=$compteGestion->get($_SESSION);
                             $compte->hydrate($compteArray);
                             //$compte->setCommentateur($compteArray['commentateur']);
-                            var_dump($compte);
+                            //var_dump($compte);
                                 ?>
                                 <div class="contact_form_container">
                                     <form id="contact_form" method="POST" action="modifier_commentaire_validation.php" class="contact_form">

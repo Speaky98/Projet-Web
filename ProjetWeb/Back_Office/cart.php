@@ -22,6 +22,16 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 
 		$row = $req->fetch();
 
+		$sql2 = 'SELECT * FROM table_produits WHERE Identifiant=:Identifiant';
+
+		$req2 = $conn->prepare($sql2);
+
+		$req2->bindValue(':Identifiant', $_GET['Identifiant']);
+
+		$req2->execute();
+
+		$row2 = $req2->fetch();
+
 		if (isset($_POST['q']) and !empty($_POST['q'])) {
 
 			$q = htmlspecialchars($_POST['q']);
@@ -375,7 +385,6 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 	</div>
 
 	<!-- Cart Info -->
-
 	<div class="cart_info">
 		<div class="container">
 			<div class="row">
@@ -389,6 +398,17 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 					</div>
 				</div>
 			</div>
+			<?PHP
+
+
+                                   /* $PanierC = new PanierC();
+                                    $Liste_Panier = $PanierC->Afficher_Panier();*/
+									?>
+								
+			<form method="POST" name="f" action="Core/AjouterPanier.php">
+			<?php
+                                        //foreach ($Liste_Panier as $row3) {
+                                            ?>
 			<div class="row cart_items_row">
 				<div class="col">
 
@@ -397,15 +417,16 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 						<!-- Name -->
 						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
 							<div class="cart_item_image">
-								<div><img src="images/cart_1.jpg" alt=""></div>
+								<div><img src="attachment/<?php echo $row2["Prod_File"]; ?>" alt=""></div>
 							</div>
 							<div class="cart_item_name_container">
-								<div class="cart_item_name"><a href="#">Smart Phone Deluxe Edition</a></div>
-								<div class="cart_item_edit"><a href="#">Edit Product</a></div>
+								<div class="cart_item_name"><input hidden type="text" name="nom" value="<?PHP echo $row2['Nom'] ?>"><a href="#"><?php echo $row2["Nom"]; ?></a></div>
+								<div class="cart_item_edit"><a href="index">Edit Product</a></div>
 							</div>
 						</div>
 						<!-- Price -->
-						<div class="cart_item_price">$790.90</div>
+						<div class="cart_item_price"><input hidden type="number" name="prix" value="<?PHP echo $row2['Prix'] ?>"><?php echo $row2["Prix"]; ?>Dt</div>
+						<input hidden type="text" name="id_prodpanier" value="<?PHP echo $row2['Identifiant'] ?>">
 						<!-- Quantity -->
 						<div class="cart_item_quantity">
 							<div class="product_quantity_container">
@@ -420,22 +441,29 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							</div>
 						</div>
 						<!-- Total -->
-						<div class="cart_item_total">$790.90</div>
+						<div class="cart_item_total"><?php echo $row2["Prix"]; ?>Dt</div>
 					</div>
 
 				</div>
 			</div>
+			<?php
+									//	}
+                                            ?>
 			<div class="row row_cart_buttons">
 				<div class="col">
 					<div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-						<div class="button continue_shopping_button"><a href="#">Continue shopping</a></div>
+						<div class="button continue_shopping_button"><a href="categories.php">Continue shopping</a></div>
 						<div class="cart_buttons_right ml-lg-auto">
-							<div class="button clear_cart_button"><a href="#">Clear cart</a></div>
-							<div class="button update_cart_button"><a href="#">Update cart</a></div>
+						<form method="POST" action="Core/SupprimerPanier.php">
+                         <input type="submit" name="Submit" value="Clear cart" class="btn-shadow dropdown-toggle btn btn-info">
+                           <input type="hidden" name="nom" value="<?PHP echo $row2['Nom']?>" name="nom">
+                            </form>
 						</div>
 					</div>
 				</div>
 			</div>
+			<input type="submit" value="Add to cart" class="btn-shadow dropdown-toggle btn btn-info" style="margin-top: 3%;">
+			</form>
 			<div class="row row_extra">
 				<div class="col-lg-4">
 					
@@ -483,7 +511,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 							<ul>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Subtotal</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div class="cart_total_value ml-auto"><?php echo $row2["Prix"]; ?>Dt</div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Shipping</div>
@@ -491,7 +519,7 @@ if (isset($_SESSION['l']) && isset($_SESSION['p'])) {
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Total</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div class="cart_total_value ml-auto"><?php echo $row2["Prix"]; ?>Dt</div>
 								</li>
 							</ul>
 						</div>
